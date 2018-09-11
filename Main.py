@@ -4,6 +4,8 @@ import sys
 from flask import request
 from random import randint
 from flask import Markup
+import pros_emotions as pe
+import cons_emotions as ce
 
 app = Flask(__name__)
 
@@ -23,8 +25,11 @@ def result():
     
     ticket_amount = 45
     
-    pros_summary = Markup(pros.replace('\n', '<br>'))
-    cons_summary = Markup(cons.replace('\n', '<br>'))    
+    pros = pe.get_pros_summary(pros)
+    cons = ce.get_cons_summary(cons)
+    
+    pros_summary = Markup(pros)
+    cons_summary = Markup(cons)    
     
     result = {
         'pros' : pros_summary,
